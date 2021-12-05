@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Movie Ticket Price Prediction</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/d99c85142c.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="hero has-background-light is-fullheight py-4">
+    <div class="box">
+      <div class="title has-text-centered">Prediksi Harga Tiket Film</div>
+      <hr />
+      <form class="px-4 pb-3" method="post">
+        {% if errors and errors|length > 0 %}
+        <div class="notification is-danger is-light content">
+          <!-- if there is only one error -->
+          {% if errors|length == 1 %} {{ errors[0] }}
+          <!-- if there are multiple errors -->
+          {% else %}
+          <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endif %}
+        <div class="field">
+          <label class="label">Judul Film</label>
+          <div class="control">
+            <div class="select">
+              <select name="title">
+                {% for title in options.titles %} {% if title ==
+                initial_values.title %}
+                <option selected>{{ title }}</option>
+                {% else %}
+                <option>{{ title }}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Kota</label>
+          <div class="control">
+            <div class="select">
+              <select name="city">
+                {% for city in options.cities %} {% if city ==
+                initial_values.city %}
+                <option selected>{{ city }}</option>
+                {% else %}
+                <option>{{ city }}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label class="label">Tanggal menonton (dd-mm-yyyy)</label>
+            <div class="control is-flex is-flex-direction-row">
+              <input
+                class="input"
+                type="number"
+                placeholder="Tanggal"
+                name="day"
+                value="{{initial_values.date.day}}"
+              />
+              <input
+                class="input"
+                type="number"
+                placeholder="Bulan"
+                name="month"
+                value="{{initial_values.date.month}}"
+              />
+              <input
+                disabled
+                class="input"
+                type="number"
+                placeholder="Tahun"
+                name="year"
+                value="2021"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Waktu (hh:mm)</label>
+            <div class="control is-flex is-flex-direction-row">
+              <input
+                class="input"
+                type="number"
+                placeholder="Jam (0-23)"
+                name="hour"
+                value="{{initial_values.time.hour}}"
+              />
+              <input
+                class="input"
+                type="number"
+                placeholder="Menit (0-59)"
+                name="minute"
+                value="{{initial_values.time.minute}}"
+              />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="mt-2 button is-success is-fullwidth">
+          <span class="icon">
+            <i class="fas fa-search"></i>
+          </span>
+          <span>Prediksi Harga</span>
+        </button>
+      </form>
+    </div>
+  </body>
+  <style>
+    .hero {
+      display: grid;
+      place-items: center;
+      width: 100vw;
+      justify-content: unset;
+    }
+    .box {
+      width: 90%;
+      max-width: 540px;
+    }
+    .select,
+    select {
+      width: 100%;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      grid-gap: 16px;
+    }
+    .content ul {
+      margin-top: 0 !important;
+      margin-left: 1em !important;
+    }
+  </style>
+</html>

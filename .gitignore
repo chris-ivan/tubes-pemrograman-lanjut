@@ -1,0 +1,4 @@
+utils/__pycache__/
+old/
+venv/
+cinema_ticket_regression_model.pkl
